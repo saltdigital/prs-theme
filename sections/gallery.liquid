@@ -1,0 +1,128 @@
+{% assign images_per_row = section.settings.grid-size %}
+
+<div class="gallery-section {% if section.settings.select_layout == 'standard' %}container{% endif %}">
+  <div class="{% if section.settings.select_layout == 'standard' %}section{% endif %} clearfix">
+    {% if section.settings.select_layout == 'standard' %}
+      <div class="sixteen columns">
+    {% endif %}
+
+      {% if section.settings.title != blank %}
+        <h2 class="title center">
+          {{ section.settings.title }}
+        </h2>
+        <div class="feature_divider"></div>
+      {% endif %}
+
+       {% if section.blocks.size > 0 %}
+        <div class="gallery-bar">
+          {% for block in section.blocks %}
+            <div class="gallery_image {{section.settings.grid-size}}" {{ block.shopify_attributes }}>
+              {% if block.settings.image != blank %}
+                <a href="{{ block.settings.image |  img_url: '2000x' }}" rel="gallery" class="lightbox {% if section.settings.select_layout == 'standard' %}add-padding{% endif %}">
+                  {{ block.settings.image | img_url: '800x800', crop: 'center' | img_tag: block.settings.image.alt }}
+                </a>
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+
+            {% if images_per_row == "two-per-row" %}
+                {% cycle '', '<br class="clear" />' %}
+              {% elsif images_per_row == "three-per-row" %}
+                {% cycle '', '', '<br class="clear" />' %}
+              {% elsif images_per_row == "four-per-row" %}
+                {% cycle '', '', '', '<br class="clear" />' %}
+              {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% if section.settings.select_layout == 'standard' %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Gallery",
+    "class": "image-gallery-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Gallery"
+      },
+      {
+        "type": "select",
+        "id": "select_layout",
+        "label": "Layout",
+        "default": "full",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full width"
+          },
+          {
+            "value": "standard",
+            "label": "Standard"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "grid-size",
+        "label": "Images per row",
+        "options": [
+          {
+            "value": "two-per-row",
+            "label": "2"
+          },
+          {
+            "value": "three-per-row",
+            "label": "3"
+          },
+          {
+            "value": "four-per-row",
+            "label": "4"
+          }
+        ],
+        "default": "four-per-row"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "800 x 800px .jpg recommended"
+          }
+        ]
+      }
+    ],
+     "presets": [
+      {
+        "name": "Gallery",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

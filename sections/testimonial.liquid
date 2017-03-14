@@ -1,0 +1,143 @@
+<div class="testimonial-container container" data-section-id="{{ section.id }}">
+   {% if section.settings.title != blank %}
+      <h2 class="title center">{{ section.settings.title}}</h2>
+      <div class="feature_divider"></div>
+  {% endif %}
+  {% if section.blocks.size > 0 %}
+    <div class="section clearfix">
+      <div class="sixteen columns">
+        {% for block in section.blocks %}
+
+          <div class="testimonial-block {% if section.settings.rounded_image != blank %}rounded{% endif %} {% if section.settings.testimonials_per_row == '1' %}sixteen columns{% elsif section.settings.testimonials_per_row == '2' %}eight columns {% cycle 'alpha', 'omega' %}{% else %}one-third column {% cycle 'alpha', '', 'omega' %}{% endif %}">
+
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | img_url: '400x', scale: 2 | img_tag: block.settings.image.alt, 'testimonial__image' }}
+            {% endif %}
+
+            {{block.settings.testimonial}}
+
+            {% if block.settings.name != blank %}
+              <p>
+                <span class="testimonial-dash">&mdash; </span>
+                
+                {% if block.settings.site_link != blank %}
+                  <a href="{{ block.settings.site_link }}" target="_blank">
+                {% endif %}
+
+                <span class="name">
+                  {% if block.settings.site_link == blank %}<strong>{% endif %}
+                    {{ block.settings.name }}
+                  {% if block.settings.site_link == blank %}</strong>{% endif %}
+                </span>
+
+                {% if block.settings.site_link != blank %}
+                  </a>
+                {% endif %}
+              </p>
+            {% endif %}
+          </div>
+
+          {% if section.settings.testimonials_per_row == "1" %}
+            {% cycle '', '<br class="clear" />' %}
+          {% elsif section.settings.testimonials_per_row == "2" %}
+            {% cycle '', '<br class="clear" />' %}
+          {% elsif section.settings.testimonials_per_row == "3" %}
+            {% cycle '', '', '<br class="clear" />' %}
+          {% endif %}
+
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Testimonials",
+    "class": "testimonial-section",
+    "max_blocks": 12,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Testimonials"
+      },
+      {
+        "type": "checkbox",
+        "id": "rounded_image",
+        "label": "Rounded images"
+      },
+      {
+      "type": "select",
+      "id": "testimonials_per_row",
+      "label": "Testimonials per row",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        }
+      ],
+      "default": "3"
+    }
+    ],
+    "blocks": [
+      {
+        "type": "quote",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Testimonial image",
+            "info": "400 x 400px recommended"
+          },
+          {
+            "type": "richtext",
+            "id": "testimonial",
+            "label": "Testimonial",
+            "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quam enim, fringilla ut purus ut, pretium ullamcorper sem. In sit amet vestibulum tellus. Aenean gravida dolor eget mi bibendum semper. </p>"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Customer name / link",
+            "info": "Optional",
+            "default": "John Doe"
+          },
+          {
+            "type": "url",
+            "id": "site_link",
+            "label": "Customer link URL",
+            "info": "Optional"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Testimonials",
+        "category": "Text",
+        "blocks": [
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

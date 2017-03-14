@@ -1,0 +1,174 @@
+<div class="container content" style="padding-top:0">
+  <div class="sixteen columns featured_links">
+    <div class="section clearfix feature">
+      {% for block in section.blocks %}
+        <div class="{% if section.settings.featured_promos_per_row == "2" %}eight columns {% cycle 'alpha', 'omega' %}{% elsif section.settings.featured_promos_per_row == "3" %}one-third column {% cycle 'alpha', '', 'omega' %}{% else %}four columns {% cycle 'alpha', '', '', 'omega' %}{% endif %} {% if section.settings.featured_links_style != blank %}{{ section.settings.featured_links_style }} {% cycle 'delay-025s', 'delay-05s', 'delay-075s', 'delay-1s' %}{% endif %} center">
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}">
+          {% endif %}
+
+          {% if block.settings.image != nil %}
+            <img {% if section.settings.rounded_image != blank %}class="rounded"{% endif %} src="{{ block.settings.image | img_url: '840x' }}" alt="{{ block.settings.image.alt }}" />
+          {% else %}
+            {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+            {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
+          {% endif %}
+
+          {% if block.settings.title != blank %}
+            <h2>{{ block.settings.title }}</h2>
+            {% if section.settings.show_divider %}
+              <div class="feature_divider"></div>
+            {% endif %}
+          {% endif %}
+          {% if block.settings.link != blank %}
+            </a>
+          {% endif %}
+
+          {% if block.settings.text != blank %}
+            {{ block.settings.text }}
+          {% endif %}
+        </div>
+
+        {% if section.settings.featured_promos_per_row == "2" %}
+          {% cycle '', '<br class="clear " />' %}
+        {% elsif section.settings.featured_promos_per_row == "3" %}
+          {% cycle '', '', '<br class="clear" />' %}
+        {% else %}
+          {% cycle '', '', '', '<br class="clear" />' %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured promotions",
+  "class": "featured-promotions-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "select",
+      "id": "featured_promos_per_row",
+      "label": "Promotions per row",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "featured_links_style",
+      "label": "Animation",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "animate_in",
+          "label": "Fade In"
+        },
+        {
+          "value": "animate_up",
+          "label": "Fade Up"
+        },
+        {
+          "value": "animate_down",
+          "label": "Fade Down"
+        }
+      ],
+      "default": "animate_down"
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded_image",
+      "label": "Rounded images"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "default": true,
+      "label": "Show divider"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Promotion",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "840px wide recommended"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Header",
+          "default": "Promotion"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>This is a featured promotion block, add some text here to talk about your promotion.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Featured promotions",
+    "category": "Image",
+    "settings": {
+      "featured_promos_per_row": "3"
+    },
+    "blocks": [
+      {
+        "type": "image",
+        "settings": {
+          "image": "",
+          "link": "",
+          "title": "Promotion",
+          "text": "<p>This is a featured promotion block, add some text here to talk about your promotion.</p>"
+        }
+      },
+      {
+        "type": "image",
+        "settings": {
+          "image": "",
+          "link": "",
+          "title": "Promotion",
+          "text": "<p>This is a featured promotion block, add some text here to talk about your promotion.</p>"
+        }
+      },
+      {
+        "type": "image",
+        "settings": {
+          "image": "",
+          "link": "",
+          "title": "Promotion",
+          "text": "<p>This is a featured promotion block, add some text here to talk about your promotion.</p>"
+        }
+      }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,87 @@
+{% if section.settings.image != nil %}
+  {% assign feature_image = true %}
+{% endif %}
+
+{% if section.settings.image != nil %}
+  <div id="slide-banner" class="parallax-banner featured-image--{{ feature_image }}">
+    <div class="bcg"
+        data-bottom-top="background-position: 50% 0px;"
+        data-top-bottom="background-position: 50% -200px;"
+        data-anchor-target="#slide-banner">
+        <div class="hsContainer">
+            <div class="hsContent center">
+              <div>
+                <h1 class="headline center">{{ page.title }}</h1>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="container main content main-wrapper">
+  <div class="sixteen columns">
+    {% unless section.settings.image %}
+      <h1 class="center">{{ page.title }}</h1>
+      <div class="feature_divider"></div>
+    {% endunless %}
+  </div>
+
+  <div class="sixteen columns page">
+    {{ page.content }}
+  </div>
+</div>
+
+<style>
+  #slide-banner .bcg {
+    background-image:url({% if section.settings.image != nil %}{{ section.settings.image | img_url: '1600x' }}{% else %}{{ 'placeholder.svg' | asset_url }}{% endif %})
+  }
+  #slide-banner .hsContainer {
+    height: {{ section.settings.image_height | remove: "px" }}px;
+  }
+  @media only screen and (max-width: 767px) {
+    #slide-banner .hsContainer {
+      height: {{ section.settings.image_height | remove: "px" | divided_by: 1.5 }}px !important;
+    }
+  }
+
+  {% if section.settings.image_darken %}
+    #slide-banner .hsContainer {
+      background-color: rgba(0,0,0,0.3);
+    }
+  {% endif %}
+
+  {% if section.settings.image %}
+    div.content {
+      padding: 0;
+    }
+  {% endif %}
+</style>
+
+{% schema %}
+{
+  "name": "Banner",
+  "class": "banner-template-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "1600 x 1000px recommended"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_darken",
+      "label": "Darken banner image",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "image_height",
+      "label": "Section height (in pixels)",
+      "info": "Maximum section height is 1000 pixels",
+      "default": "400"
+    }
+  ]
+}
+{% endschema %}

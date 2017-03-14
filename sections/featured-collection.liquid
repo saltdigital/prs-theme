@@ -1,0 +1,114 @@
+{% assign collection = '' %}
+{% assign products = collections[section.settings.frontpage_collection].products %}
+{% assign products_per_row = section.settings.frontpage_products_per_row %}
+
+<div class="container featured_products">
+  <div class="sixteen columns center homepage_content">
+    {% if section.settings.title != blank %}
+      <h2 class="title">
+        <a href="{{ collections[section.settings.frontpage_collection].url }}">{{section.settings.title}}</a>
+      </h2>
+      <div class="feature_divider"></div>
+    {% endif %}
+    {% if collections[section.settings.frontpage_collection].description != blank %}
+      <div class="section clearfix">
+        {{ collections[section.settings.frontpage_collection].description }}
+      </div>
+    {% endif %}
+    {% if products.length > 0 %}
+      {% assign limit = section.settings.frontpage_products_limit | plus: 1 %}
+      {% include 'product-loop', limit: limit %}
+    {% else %}
+      {% assign limit = section.settings.frontpage_products_limit %}
+      {% for i in (1..limit) %}
+        <div class="{% if section.settings.frontpage_products_per_row == '2' %}eight{% elsif section.settings.frontpage_products_per_row == '3' %}one-third {% elsif section.settings.frontpage_products_per_row == '4' %}four{% endif %} {% if section.settings.frontpage_products_per_row == '3' %}column{% else %}columns{% endif %}
+        {% if products_per_row == '2' %}{% cycle 'alpha', 'omega' %}{% elsif products_per_row == '3' %}{% cycle 'alpha','', 'omega' %}{% elsif products_per_row == '4' %}{% cycle 'alpha','', '', 'omega' %}{% endif %} thumbnail ">
+          <a href="#" itemprop="url">
+            <div class="relative product_image">
+              {% capture num %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+              {{ 'collection-' | append: num | placeholder_svg_tag: 'placeholder-svg placeholder-svg--product' }}
+            </div>
+            <div class="info">
+              <span class="title">{{ 'homepage.onboarding.product_title' | t }}</span>
+                <span class="price">
+                <span>$49.60</span>
+              </span>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "class": "featured-collection-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured collection"
+    },
+    {
+      "type": "collection",
+      "id": "frontpage_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "select",
+      "id": "frontpage_products_per_row",
+      "label": "Products per row",
+      "default": "3",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "frontpage_products_limit",
+      "label": "Limit products",
+      "default": "12",
+      "options": [
+        {
+          "value": "12",
+          "label": "12"
+        },
+        {
+          "value": "24",
+          "label": "24"
+        },
+        {
+          "value": "36",
+          "label": "36"
+        },
+        {
+          "value": "48",
+          "label": "48"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Featured collection",
+    "category": "Collection",
+    "settings": {
+      "frontpage_collection": "",
+      "frontpage_products_per_row": "4"
+    }
+  }]
+}
+{% endschema %}

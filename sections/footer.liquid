@@ -1,0 +1,111 @@
+<div class="footer">
+  <div class="container">
+
+    <div class="seven columns">
+      {% if section.settings.footer_social_icons %}
+        <h6>{{ 'layout.general.social' | t }}</h6>
+        <div class="js-social-icons">
+          {% include 'social-icons' %}
+        </div>
+      {% endif %}
+      {% if section.settings.footer_content_page != blank %}
+        {{ pages[section.settings.footer_content_page].content }}
+      {% endif %}
+    </div>
+
+    <div class="nine columns">
+      {% if section.settings.footer_linklist_1 != blank %}
+        <ul class="footer_menu">
+          {% for link in linklists[section.settings.footer_linklist_1].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if section.settings.footer_newsletter %}
+        <p>{{ 'general.newsletter_form.description' | t }}</p>
+        {% include 'newsletter' %}
+      {% endif %}
+
+      {% if section.settings.footer_content_page2 != blank %}
+        {{ pages[section.settings.footer_content_page2].content }}
+      {% endif %}
+
+      <p class="credits">
+        &copy; {{ "now" | date: "%Y" }} {{ shop.name | link_to: '/' }}.
+        {{ section.settings.copyright_text }}<br />
+        {% if section.settings.display_designed_by == true %}
+          {{ 'layout.general.designer_credits_html' | t }}
+        {% endif %}
+
+        {{ powered_by_link | split: '" ' | join: '?ref=out-of-the-sandbox" ' | split: '">' | join: '?ref=out-of-the-sandbox">' }}
+      </p>
+
+      {% if section.settings.display_payment_methods %}
+        <div class="payment_methods">
+          {% for type in shop.enabled_payment_types %}
+            <img src="{{ type | payment_type_img_url }}" alt="{{ type | replace: "_", " " | capitalize }}" />
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "footer-template-section",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "footer_linklist_1",
+      "label": "Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "footer_newsletter",
+      "label": "Show newsletter",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "footer_social_icons",
+      "label": "Show social media icons",
+      "default": true
+    },
+
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_designed_by",
+      "label": "Show theme designer credits",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "display_payment_methods",
+      "label": "Show payment method icons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "page",
+      "id": "footer_content_page",
+      "label": "Left column page"
+    },
+    {
+      "type": "page",
+      "id": "footer_content_page2",
+      "label": "Right column page"
+    }
+  ]
+}
+{% endschema %}

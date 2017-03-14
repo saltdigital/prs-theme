@@ -1,0 +1,171 @@
+{% assign collections_per_row = section.settings.frontpage_collections_per_row %}
+
+<div class="container">
+  {% if section.blocks.size > 0 %}
+    {% if section.settings.title != blank %}
+      <div class="sixteen columns center">
+        <h2 class="title">
+          {{ section.settings.title }}
+        </h2>
+        <div class="feature_divider"></div>
+      </div>
+    {% endif %}
+    <div class="sixteen columns">
+      <div class="section clearfix">
+        <div class="featured_collections">
+          {% for block in section.blocks %}
+
+            {% assign feature_collection = block.settings.feature_collection %}
+            {% assign collection = collections[feature_collection] %}
+
+            {% if block.settings.image %}
+              {% assign collection_image = block.settings.image %}
+              {% assign collection_image_alt = block.settings.image.alt | escape %}
+            {% elsif collection.image != blank %}
+              {% assign collection_image = collection.image %}
+              {% assign collection_image_alt = collection.title | escape %}
+            {% else collection.empty? == false %}
+              {% assign collection_image = collection.products.first.featured_image %}
+              {% assign collection_image_alt = collection.products.first.featured_image.alt | escape %}
+            {% endif %}
+
+            <div class="{% if collections_per_row == "2" %}eight columns {% cycle 'alpha', 'omega' %}{% elsif collections_per_row == "3" %}one-third column {% cycle 'alpha', '', 'omega' %}{% elsif collections_per_row == "4" %}four columns {% cycle 'alpha', '', '', 'omega' %}{% else %}one-fifth column {% cycle 'alpha', '', '', '', 'omega' %}{% endif %} thumbnail {% if section.settings.collection_count == blank and section.settings.frontpage_collections_title == blank %}blank{% endif %} {% cycle 'even', 'odd' %}">
+              <a href="{{ collection.url }}" title="{{ collection.title }}">
+                {% if collection_image != nil %}
+                  <img  src="{{ 'loader.gif' | asset_url }}"
+                        data-src="{{ collection_image | img_url: '480x' }}"
+                        data-src-retina="{{ collection_image | img_url: '480x', scale: 2 }}"
+                        alt="{{ collection_image_alt }}" />
+                {% else %}
+                  {% capture num %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+                  {{ 'collection-' | append: num | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+
+                <div class="info">
+                  {% if section.settings.frontpage_collections_title %}
+                    <span class="title">
+                      {% if collection != blank %}
+                        {{ collection.title }}
+                      {% else %}
+                        {{ "homepage.onboarding.collection_title" | t }}
+                      {% endif %}
+                    </span>
+                  {% endif %}
+
+                  {% if section.settings.collection_count %}
+                    <span class="price">
+                    {% if collection != blank %}
+                      {{ 'layout.counts.items_with_count' | t: count: collection.all_products_count }}
+                    {% else %}
+                      {{ 'layout.counts.items_with_count' | t: count: 3 }}
+                    {% endif %}
+                    </span>
+                  {% endif %}
+                </div>
+              </a>
+            </div>
+
+            {% if collections_per_row == "2" %}
+              {% cycle '', '<br class="clear product_clear" />' %}
+            {% elsif collections_per_row == "3" %}
+              {% cycle '', '', '<br class="clear product_clear" />' %}
+            {% elsif collections_per_row == "4" %}
+              {% cycle '', '', '', '<br class="clear product_clear" />' %}
+            {% elsif collections_per_row == "5" %}
+              {% cycle '', '', '', '', '<br class="clear product_clear" />' %}
+            {% endif %}
+
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Collection list",
+  "class": "collection-list-section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection list"
+    },
+    {
+      "type": "select",
+      "id": "frontpage_collections_per_row",
+      "label": "Collections per row",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "checkbox",
+      "id": "frontpage_collections_title",
+      "label": "Display collection title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_count",
+      "label": "Display collection product count",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "feature_collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Collection list",
+    "category": "Collection",
+    "settings": {
+
+    },
+    "blocks": [
+      {
+        "type": "collection"
+      },
+      {
+        "type": "collection"
+      },
+      {
+        "type": "collection"
+      }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,184 @@
+{% if section.settings.image or section.settings.featured_collection_image %}
+  {% assign feature_image = true %}
+  <div id="slide-collection" class="parallax-banner featured-image--{{ feature_image }}">
+    <div class="bcg"
+        data-bottom-top="background-position: 50% 0px;"
+        data-top-bottom="background-position: 50% -200px;"
+        data-anchor-target="#slide-collection">
+          <div class="hsContainer">
+            <div class="hsContent center">
+              {% if section.settings.display_collection_header_title %}
+                <div>
+                  <h1 class="headline" style="color:{{settings.banner_color}}">{{ collection.title }}</h1>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="container main content main-wrapper">
+  {% paginate collections by section.settings.pagination_limit %}
+    {% assign collections_per_row = section.settings.collections_per_row %}
+
+    {% if section.settings.display_collection_header_title and feature_image == blank %}
+      <div class="sixteen columns">
+        <h1 class="center">{{ 'collections.general.title' | t }}</h1>
+        <div class="feature_divider"></div>
+      </div>
+    {% endif %}
+
+    <div class="section clearfix">
+      <div class="sixteen columns breadcrumb">
+        <div class="eight columns breadcrumb_text alpha" itemscope itemtype="http://schema.org/BreadcrumbList">
+          {% if section.settings.collection_breadcrumb %}
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="item"><span itemprop="name">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+            &nbsp;<span class="icon-arrow-right"></span>
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="/collections" title="{{ 'collections.general.title' | t }}" itemprop="item"><span itemprop="name">{{ 'collections.general.title' | t }}</span></a></span>
+            {% if paginate.pages != 0 %}
+              &nbsp;<span class="icon-arrow-right"></span> {{ 'general.breadcrumbs.page' | t: current_page: paginate.current_page, pages: paginate.pages }}
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% capture new_row %}
+        <br class="clear product_clear" />
+    {% endcapture %}
+
+    {% for collection in collections %}
+      {% unless collection.handle == 'frontpage' %}
+        {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+        <div class="{% if collections_per_row == "2" %}eight columns{% elsif collections_per_row == "3" %}one-third column{% else %}four columns{% endif %} thumbnail {% cycle 'even', 'odd' %}">
+          <a href="{{ collection.url }}" title="{{ collection_title }}">
+            {% if collection.image %}
+              <img  data-sizes="auto"
+                    src="{{ 'loader.gif' | asset_url }}"
+                    data-src="{{ collection.image.src | img_url: '580x'}}"
+                    data-src-retina="{{ collection.image.src | img_url: '580x', scale: 2 }}"
+                    alt="{{ collection.image.alt }}" />
+            {% else %}
+              <img  data-sizes="auto"
+                    src="{{ 'loader.gif' | asset_url }}"
+                    data-src="{{ collection.products.first.featured_image | img_url: '580x'}}"
+                    data-src-retina="{{ collection.products.first.featured_image | img_url: '580x'}}"
+                    alt="{{ collection.title | escape }}" />
+            {% endif %}
+
+            <div class="info">
+              <span class="title">{{ collection.title }}</span>
+            </div>
+          </a>
+        </div>
+
+        {% if collections_per_row == "2" %}
+          {% cycle '', new_row %}
+        {% elsif collections_per_row == "3" %}
+          {% cycle '', '', new_row %}
+        {% elsif collections_per_row == "4" %}
+          {% cycle '', '', '', new_row %}
+        {% endif %}
+      {% endunless %}
+    {% endfor %}
+
+    {% include 'pagination' %}
+  {% endpaginate %}
+</div>
+
+<style>
+  #slide-collection .bcg {
+    background-image:url({% if section.settings.featured_collection_image %}{{ collection.image | img_url: '1600x' }}{% elsif section.settings.image != nil %}{{ section.settings.image | img_url: '1600x' }}{% endif %})
+  }
+  #slide-collection .hsContainer {
+    height: {{ section.settings.image_height }}px;
+  }
+  @media only screen and (max-width: 767px) {
+    #slide-collection .hsContainer {
+      height: {{ section.settings.image_height | divided_by: 1.5 }}px !important;
+    }
+  }
+</style>
+
+{% schema %}
+
+{
+  "name": "Collections",
+  "class": "collection-template-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "collections_per_row",
+      "label": "Collections per row",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "pagination_limit",
+      "label": "Collections per page",
+      "options": [
+        {
+          "value": "24",
+          "label": "24"
+        },
+        {
+          "value": "36",
+          "label": "36"
+        },
+        {
+          "value": "48",
+          "label": "48"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "display_collection_header_title",
+      "label": "Show collection title"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_breadcrumb",
+      "label": "Show breadcrumb links",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Collections banner image"
+    },
+    {
+      "type": "checkbox",
+      "id": "featured_collection_image",
+      "label": "Show featured collection image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner image",
+      "info": "1600 x 1000px recommended"
+    },
+    {
+      "type": "text",
+      "id": "image_height",
+      "label": "Section height (in pixels)",
+      "info": "Maximum section height is 1000 pixels",
+      "default": "400"
+    }
+  ]
+}
+
+{% endschema %}

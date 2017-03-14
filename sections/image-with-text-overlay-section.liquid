@@ -1,0 +1,153 @@
+<div class="parallax-slide slide" id="slide-{{ section.id }}">
+  <div class="bcg {% if section.settings.image == nil %}bcg-placeholder{% endif %}" style="background-image:url({% if section.settings.image != nil %}{{ section.settings.image | img_url: '1600x' }}{% else %}{{ 'placeholder.svg' | asset_url }}{% endif %});"
+      data-bottom-top="background-position: 50% 200px;"
+      data-top-bottom="background-position: 50% -200px;"
+      data-anchor-target="#slide-{{ section.id }}">
+      {% if section.settings.link != blank and section.settings.button_label == blank %}
+        <a href="{{ section.settings.link }}" class="full-link">
+          {{ section.settings.link }}
+        </a>
+      {% endif %}
+      <div class="hsContainer">
+        <div class="hsContent {{ section.settings.text_alignment }}">
+          <div class="container">
+            <div class="columns {% if block.settings.text_position == 'left' %} eight offset-by-one {% elsif block.settings.text_position == 'right' %} eight offset-by-eight {% else %} sixteen {% endif %} align_{{ block.settings.text_align }}">
+              <div class="{{ section.settings.headline_animation }}">
+                {% if section.settings.title != blank %}
+                  <p class="headline">{{ section.settings.title }}</p>
+                {% endif %}
+                {% if section.settings.subtitle != blank %}
+                  <div class="subtitle">
+                    {{ section.settings.subtitle }}
+                  </div>
+                {% endif %}
+                {% if section.settings.button_label != blank %}
+                  <a {% if section.settings.link != blank %}href="{{ section.settings.link }}"{% endif %} class="action_button">
+                    {{ section.settings.button_label }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% if section.settings.homepage_arrow %}
+            <a href="#slide-{{ section.id }}-content" class="scroll-arrow animate_down">
+              <span class="icon-arrow-down"></span>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+  </div>
+</div>
+<a name="slide-{{ section.id }}-content" id="slide-{{ section.id }}-content"></a>
+
+<style>
+  #slide-{{ section.id }} .hsContainer {
+    height: {{ section.settings.parallax_image_height | remove: "px" }}px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    #slide-{{ section.id }} .hsContainer {
+      height: {{ section.settings.parallax_image_height | divided_by: 2.5 }}px !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Image with text overlay",
+  "class": "image-with-text-overlay-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "1600 x 1000px recommended"
+    },
+    {
+        "type": "text",
+        "id": "parallax_image_height",
+        "label": "Section height (in pixels)",
+        "info": "Maximum section height is 1000 pixels",
+        "default": "600"
+    },
+    {
+      "type": "select",
+      "id": "headline_animation",
+      "label": "Heading text animation",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "animate_in",
+          "label": "Fade In"
+        },
+        {
+          "value": "animate_up",
+          "label": "Fade Up"
+        },
+        {
+          "value": "animate_down",
+          "label": "Fade Down"
+        }
+      ],
+      "default": "animate_down"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Your headline here"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "<p>This is a short subheading for your banner image</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "homepage_arrow",
+      "label": "Show scroll down arrow",
+      "default": true
+    }
+  ],
+  "presets": [{
+    "name": "Image with text overlay",
+    "category": "Image",
+    "settings": {
+    }
+  }]
+}
+{% endschema %}

@@ -1,0 +1,249 @@
+<div class="parallax-slide slide" id="video-{{ section.id }}">
+  <div class="bcg {% if section.settings.image == nil %}bcg-placeholder{% endif %}" style="background-image:url({% if section.settings.image != nil %}{{ section.settings.image | img_url: '1600x' }}{% else %}{{ 'placeholder.svg' | asset_url }}{% endif %});"
+      data-center="background-position: 50% 0px;"
+      data-top-bottom="background-position: 50% -200px;"
+      data-anchor-target="#video-{{ section.id }}">
+    <div  class="homepage-video darken-video-{{ section.settings.video_dark_overlay }}"
+          data-video-id="video-{{section.id}}"
+          data-autoplay="{{ section.settings.autoplay }}"
+          data-autoloop="{{ section.settings.autoloop }}"
+          data-video-text="{{ section.settings.display_text_over_video }}"
+          >
+      <div class="homepage-video--media"
+        data-video-src="{{ section.settings.video.id }}"
+        data-aspect-ratio="{{ section.settings.aspect_ratio }}"
+        data-provider="{{ section.settings.source }}"
+        data-video-mp4="{{ section.settings.mp4 }}"
+        data-video-ogv="{{ section.settings.ogv }}"
+        >
+        <div class="hsContainer" data-play-video>
+          <div class="hsContent caption js-caption {{ section.settings.text_align }}">
+            <div class="{{ section.settings.headline_animation }}">
+              {% if section.settings.title != blank %}
+                <p class="headline">{{ section.settings.title }}</p>
+              {% endif %}
+              {% if section.settings.subtitle != blank %}
+                <div class="subtitle">
+                  {{ section.settings.subtitle }}
+                </div>
+              {% endif %}
+              {% if section.settings.button_label != blank %}
+                <a {% if section.settings.link != blank %}href="{{ section.settings.link }}"{% endif %} class="action_button" data-play-video>
+                  {{ section.settings.button_label }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% if section.settings.homepage_arrow %}
+          <a href="#slide-{{ section.id }}-content" class="scroll-arrow animate_down">
+            <span class="icon-arrow-down"></span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<a name="slide-{{ section.id }}-content" id="slide-{{ section.id }}-content"></a>
+
+<style>
+  #video-{{ section.id }} .hsContainer {
+    height: {{ section.settings.parallax_image_height }}px;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    #video-{{ section.id }} .hsContainer {
+      height: {{ section.settings.parallax_image_height | divided_by: 2.5 }}px !important;
+    }
+  }
+  
+</style>
+
+{% schema %}
+{
+  "name": "Featured video",
+  "class": "video-section",
+  "settings": [
+      {
+      "type": "header",
+      "content": "Video"
+    },
+
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Video source",
+      "options": [
+        {
+          "value": "youtube",
+          "label": "YouTube"
+        },
+        {
+          "value": "vimeo",
+          "label": "Vimeo"
+        },
+        {
+          "value": "html5",
+          "label": "HTML5"
+        }
+      ],
+      "default": "youtube"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "16:9",
+          "label": "16:9"
+        },
+        {
+          "value": "4:3",
+          "label": "4:3"
+        }
+      ],
+      "default": "16:9"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay video",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoloop",
+      "label": "Autoloop video",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "video_dark_overlay",
+      "label": "Darken video"
+    },
+    {
+      "type": "video_url",
+      "id": "video",
+      "label": "YouTube or Vimeo video URL",
+      "accept": ["youtube", "vimeo"],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
+    {
+      "type": "text",
+      "id": "mp4",
+      "label": "HTML5 MP4 File URL"
+    },
+    {
+      "type": "text",
+      "id": "ogv",
+      "label": "HTML5 OGV File URL (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+   {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "1600 x 900px recommended"
+    },
+    {
+        "type": "text",
+        "id": "parallax_image_height",
+        "label": "Section height (in pixels)",
+        "default": "600"
+    },
+    {
+      "type": "select",
+      "id": "headline_animation",
+      "label": "Heading text animation",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "animate_in",
+          "label": "Fade In"
+        },
+        {
+          "value": "animate_up",
+          "label": "Fade Up"
+        },
+        {
+          "value": "animate_down",
+          "label": "Fade Down"
+        }
+      ],
+      "default": "animate_down"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_text_over_video",
+      "label": "Show text when video is playing",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Your headline here"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "<p>This is a short subheading for your banner image</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Play Video"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "homepage_arrow",
+      "label": "Show scroll down arrow",
+      "default": false
+    }
+  ],
+  "presets": [{
+    "name": "Featured video",
+    "category": "Video",
+    "settings": {
+      "autoplay": true,
+      "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "source": "youtube"
+    }
+  }]
+}
+
+{% endschema %}

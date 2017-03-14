@@ -1,0 +1,232 @@
+{% if section.settings.image != nil %}
+  {% assign feature_image = true %}
+{% endif %}
+
+{% if section.settings.image != nil %}
+  <div id="slide-contact" class="parallax-banner featured-image--{{ feature_image }}">
+    <div class="bcg"
+        data-bottom-top="background-position: 50% 0px;"
+        data-top-bottom="background-position: 50% -200px;"
+        data-anchor-target="#slide-contact"
+        style="background-image:url({% if section.settings.image != nil %}{{ section.settings.image | img_url: '1600x' }}{% else %}{{ 'placeholder.svg' | asset_url }}{% endif %}})">
+        <div class="hsContainer" style="height: {{ section.settings.image_height | remove: 'px' }}px">
+            <div class="hsContent center">
+              <div>
+                {% if section.settings.title != blank %}
+                  <h1 class="headline">{{ section.settings.title }}</h1>
+                {% endif %}
+                {% if section.settings.subtitle != blank %}
+                  <div class="subtitle">
+                    {{ section.settings.subtitle }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="container main content main-wrapper">
+  <div class="ten columns offset-by-three page clearfix">
+    {% if section.settings.image == nil %}
+      <h1 class="center">{{ page.title }}</h1>
+      <div class="feature_divider"></div>
+    {% endif %}
+
+    {% form 'contact' %}
+      {% if form.posted_successfully? %}
+        <p class="quote">{{ 'contact.form.post_success' | t }}</p>
+      {% endif %}
+
+      {% if form.errors %}
+        <p class="quote">{{ 'general.forms.post_error' | t }}</p>
+
+       {% assign message = 'contact.form.message' | t %}
+        <ul class="center">
+          {% for field in form.errors %}
+            {% if field == 'form' %}
+              <li>
+                {{ form.errors.messages[field] }}
+              </li>
+            {% else %}
+              <li>
+                {% assign field_name = field | replace: 'body', message %}
+                {{ 'general.forms.post_field_error_html' | t: field: field_name, error: form.errors.messages[field] }}
+              </li>
+            {% endif %}
+          {% endfor %}
+         </ul>
+      {% endif %}
+
+      {{ page.content }}
+
+       <br class="clear" />
+       <div class="five columns alpha">
+        {% assign name_attr = 'contact.form.name' | handle %}
+        <label for="contactFormName">{{ 'contact.form.name' | t }} <span class="red">*</span></label>
+        <input type="text" id="contactFormName" name="contact[{{ name_attr }}]" placeholder="{{ 'contact.form.name' | t }}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" required="required">
+       </div>
+       <div class="five columns omega">
+        <label for="contactFormEmail">{{ 'contact.form.email' | t }} <span class="red">*</span></label>
+        <input type="email" id="contactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required="required">
+       </div>
+       {% comment %}
+        {% assign name_attr = 'contact.form.phone' | t | handle %}
+        <label for="contactFormPhone" class="hidden-label">{{ 'contact.form.phone' | t }}</label>
+        <input type="tel" id="contactFormPhone" name="contact[{{ name_attr }}]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+        {% endcomment %}
+
+      <label for="contactFormMessage">{{ 'contact.form.message' | t }} <span class="red">*</span></label>
+      <textarea rows="5" id="contactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}" required="required">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+
+      <input type="submit" class="submit action_button add_to_cart" value="{{ 'contact.form.send' | t }}" />
+    {% endform %}
+  </div>
+</div>
+
+{% if section.settings.contact_address != blank %}
+  <br class="clear" />
+  <div class="embed-container maps">
+    <iframe width="100%" height="220" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q={{ section.settings.contact_address | replace: ' ', '+' }}&amp;z={{ section.settings.zoom_level }}&amp;output=embed"></iframe>
+  </div>
+{% endif %}
+
+<style>
+  @media only screen and (max-width: 767px) {
+    #slide-contact .hsContainer {
+      height: {{ section.settings.image_height | divided_by: 1.5 }}px !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "class": "contact-template-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "contact_address",
+      "label": "Street address",
+      "info": "The full address that will be placed on the map."
+    },
+    {
+      "type": "select",
+      "id": "zoom_level",
+      "label": "Map zoom level (1-20)",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+        },
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "10",
+          "label": "10"
+        },
+        {
+          "value": "11",
+          "label": "11"
+        },
+        {
+          "value": "12",
+          "label": "12"
+        },
+        {
+          "value": "13",
+          "label": "13"
+        },
+        {
+          "value": "14",
+          "label": "14"
+        },
+        {
+          "value": "15",
+          "label": "15"
+        },
+        {
+          "value": "16",
+          "label": "16"
+        },
+        {
+          "value": "17",
+          "label": "17"
+        },
+        {
+          "value": "18",
+          "label": "18"
+        },
+        {
+          "value": "19",
+          "label": "19"
+        },
+        {
+          "value": "20",
+          "label": "20"
+        }
+      ],
+      "default": "12"
+    },
+    {
+      "type": "header",
+      "content": "Banner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner image",
+      "info": "1600 x 1000px recommended"
+    },
+    {
+      "type": "text",
+      "id": "image_height",
+      "label": "Section height (in pixels)",
+      "info": "Maximum section height is 1000 pixels",
+      "default": "400"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Get in touch"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subheading"
+    }
+  ]
+}
+{% endschema %}
