@@ -1,8 +1,8 @@
-<div class="container">
-  <div class="sixteen columns">
-    <div class="homepage_content section clearfix">
+<div class="image-text-container">
+  <div class="flex-box">
+    <div class=" flex-box  clearfix">
       {% capture image_layout %}
-        <div class="six columns offset-by-one image_column {% if section.settings.layout == 'left' %}alpha{% else %}omega{% endif %}">
+        <div class="flex-box__item-half offset-by-one image_column {% if section.settings.layout == 'left' %}alpha{% else %}omega{% endif %}">
           {% if section.settings.image != blank %}
             {{ section.settings.image | img_url: '580x', scale: 2 | img_tag: section.settings.image.alt, 'lazyload transition-in' }}
           {% else %}
@@ -15,20 +15,22 @@
         {{ image_layout }}
       {% endif %}
 
-      <div class="eight columns content_column {% if section.settings.layout == 'left' %}offset-by-one omega{% else %}alpha{% endif %} text-align--{{section.settings.text_alignment}}">
-        {% if section.settings.title != blank %}
-          <h3>
-            {{ section.settings.title | escape }}
-          </h3>
-        {% endif %}
-        {% if section.settings.text != blank %}
-          {{ section.settings.text }}
-        {% endif %}
-        {% if section.settings.button_label != blank %}
-          <a {% if section.settings.button_link != blank %}href="{{ section.settings.button_link }}"{% endif %} class="action_button">
-            {{ section.settings.button_label }}
-          </a>
-        {% endif %}
+      <div class="flex-box__item-half content_column {% if section.settings.layout == 'left' %}offset-by-one omega{% else %}alpha{% endif %} text-align--{{section.settings.text_alignment}}">
+        <div class="flex-box__content">
+          {% if section.settings.title != blank %}
+            <h3>
+              {{ section.settings.title | escape }}
+            </h3>
+          {% endif %}
+          {% if section.settings.text != blank %}
+            {{ section.settings.text }}
+          {% endif %}
+          {% if section.settings.button_label != blank %}
+            <a {% if section.settings.button_link != blank %}href="{{ section.settings.button_link }}"{% endif %} class="action_button">
+              {{ section.settings.button_label }}
+            </a>
+          {% endif %}
+        </div>
       </div>
 
       {% if section.settings.layout == 'right' %}

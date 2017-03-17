@@ -4936,6 +4936,28 @@ and (max-device-width : 1024px)  {
     }
   }
 }
+.image-with-text-section{
+  &:nth-of-type(even) {
+      background: white;
+      .flex-box__item-half {
+        &:first-of-type {
+          order: 2;
+          @media only screen and (min-width: 767px) {
+            order: 1;
+          }
+        }
+        &:last-of-type {
+          order: 1;
+          @media only screen and (min-width: 767px) {
+            order: 2;
+          }
+        }
+      }
+    }
+    .flex-box__item-half {
+      background: lightgrey;
+    }
+}
 
 /* Design Page */
 .flex-box {
@@ -4955,7 +4977,7 @@ and (max-device-width : 1024px)  {
       &:last-of-type {
         order: 1;
         @media only screen and (min-width: 767px) {
-          order: 1;
+          order: 2;
         }
       }
     }
@@ -4986,5 +5008,26 @@ and (max-device-width : 1024px)  {
     width: 100%;
     margin: 0 auto;
     padding: 25px;
+  }
+}
+
+.design-container {
+  .flex-box {
+    &:nth-of-type(2), &:nth-of-type(4) {
+      .flex-box__item-half {
+        &:first-of-type {
+          order: 2;
+          @media only screen and (min-width: 767px) {
+            order: 1;
+          }
+        }
+        &:last-of-type {
+          order: 1;
+          @media only screen and (min-width: 767px) {
+            order: 2;
+          }
+        }
+      }
+    }
   }
 }
