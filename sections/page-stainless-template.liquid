@@ -1,0 +1,152 @@
+{% if section.settings.image != nil %}
+  {% assign feature_image = true %}
+{% endif %}
+
+{% if section.settings.image != nil %}
+  <div id="slide-banner" class="parallax-banner featured-image--{{ feature_image }}">
+    <div class="bcg"
+        data-bottom-top="background-position: 50% 0px;"
+        data-top-bottom="background-position: 50% -200px;"
+        data-anchor-target="#slide-banner">
+        <div class="hsContainer">
+            <div class="hsContent center">
+              <div>
+                <h1 class="headline center">{{ page.title }}</h1>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="stainless-container">
+  <div class="flex-box">
+    <div class="flex-box__item-half">
+      <div class="flex-box__content">
+        <h2>Design Introduction Meeting</h2>
+        <ul>
+          <li>Design Proposal/Retainer agreement</li>
+          <li>Meet on-site, co-ordinate with architect and engineers</li>
+          <li>Co-ordinate with all consultants</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex-box__item-half">
+      {{ 'design-img-1.jpg' | asset_url | img_tag: 'Design Introduction meeting', 'flex-box__img' }}
+    </div>
+  </div>
+  <div class="flex-box">
+    <div class="flex-box__item-half">
+      {{ 'design-img-2.jpg' | asset_url | img_tag: 'Project Management', 'flex-box__img' }}
+    </div>
+    <div class="flex-box__item-half">
+      <div class="flex-box__content">
+        <h2>Project Management</h2>
+        <ul>
+          <li>Ensure site measurements for custom products</li>
+          <li>Sign off on all spec sheets and move to installation</li>
+          <li>Monitor site and attend all co-ordination meetings</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="flex-box">
+    <div class="flex-box__item-half">
+      <div class="flex-box__content">
+        <h2>Staging &amp; Delivery</h2>
+        <ul>
+          <li>Two logistics facilities to physically inspect and receive product into our warehouse</li>
+          <li>Co-ordinate wit site to ensure site is ready for receiving and installation</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex-box__item-half">
+      {{ 'design-img-3.jpg' | asset_url | img_tag: 'Staging & Delivery', 'flex-box__img' }}
+    </div>
+  </div>
+  <div class="flex-box">
+    <div class="flex-box__item-half">
+      {{ 'design-img-4.jpg' | asset_url | img_tag: 'Installation', 'flex-box__img' }}
+    </div>
+    <div class="flex-box__item-half">
+      <div class="flex-box__content">
+        <h2>Installation</h2>
+        <ul>
+          <li>Pacific staff on-site to install stainless steel fixtures and set into place equipment left ready for final connections</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="flex-box">
+    <div class="flex-box__item-half">
+      <div class="flex-box__content">
+        <h2>Pre-Opening Procedure</h2>
+        <ul>
+          <li>Project closure and handover to operations</li>
+          <li> Start-ups and demonstrations</li>
+          <li>Post job review for continual improvement</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex-box__item-half">
+      {{ 'design-img-5.jpg' | asset_url | img_tag: 'Design Introduction meeting', 'flex-box__img' }}
+    </div>
+  </div>
+</div> <!-- end design container  -->
+
+
+<style>
+  #slide-banner .bcg {
+    background-image:url({% if section.settings.image != nil %}{{ section.settings.image | img_url: '1600x' }}{% else %}{{ 'placeholder.svg' | asset_url }}{% endif %})
+  }
+  #slide-banner .hsContainer {
+    height: {{ section.settings.image_height | remove: "px" }}px;
+  }
+  @media only screen and (max-width: 767px) {
+    #slide-banner .hsContainer {
+      height: {{ section.settings.image_height | remove: "px" | divided_by: 1.5 }}px !important;
+    }
+  }
+
+  {% if section.settings.image_darken %}
+    #slide-banner .hsContainer {
+      background-color: rgba(0,0,0,0.3);
+    }
+  {% endif %}
+
+  {% if section.settings.image %}
+    div.content {
+      padding: 0;
+    }
+  {% endif %}
+</style>
+
+
+{% schema %}
+{
+  "name": "Banner",
+  "class": "banner-template-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "1600 x 1000px recommended"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_darken",
+      "label": "Darken banner image",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "image_height",
+      "label": "Section height (in pixels)",
+      "info": "Maximum section height is 1000 pixels",
+      "default": "400"
+    }
+  ]
+}
+{% endschema %}
