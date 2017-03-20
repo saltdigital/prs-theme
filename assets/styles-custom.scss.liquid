@@ -1,0 +1,136 @@
+/* #Custom Styles
+================================================== */
+
+/* Landing Page  */
+
+.featured-content-section {
+  h2.title {
+    @media only screen and (max-width: 767px) {
+      font-size: 16px;
+    }
+  }
+}
+
+.featured-promotions-section {
+  .one-third {
+    img {
+      width: 200px;
+      height: auto;
+    }
+  }
+}
+
+.logo-bar-section {
+  .logo-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .logo-bar__item {
+      flex: 0 1 45%;
+      @media only screen and (min-width: 767px){
+        flex: 0 1 18%;
+      }
+    }
+  }
+}
+.image-with-text-section{
+  &:nth-of-type(even) {
+      background: white;
+      .flex-box__item-half {
+        &:first-of-type {
+          order: 2;
+          @media only screen and (min-width: 767px) {
+            order: 1;
+          }
+        }
+        &:last-of-type {
+          order: 1;
+          @media only screen and (min-width: 767px) {
+            order: 2;
+          }
+        }
+      }
+    }
+    .flex-box__item-half {
+      background: #ededed;
+    }
+}
+
+/* Design Page */
+
+/* Flex Box Container */
+.flex-box {
+  display: flex;
+  flex-direction: column;
+  @media only screen and (min-width: 767px) {
+    flex-direction: row;
+  }
+  &:nth-of-type(2), &:nth-of-type(4) {
+    .flex-box__item-half {
+      &:first-of-type {
+        order: 2;
+        @media only screen and (min-width: 767px) {
+          order: 1;
+        }
+      }
+      &:last-of-type {
+        order: 1;
+        @media only screen and (min-width: 767px) {
+          order: 2;
+        }
+      }
+    }
+  }
+  .flex-box__item-half {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 1 100%;
+    text-align: left;
+    @media only screen and (min-width: 767px) {
+      flex: 0 1 50%;
+      text-align: center;
+    }
+    ul {
+      margin: 0;
+      @media only screen and (min-width: 767px) {
+        list-style: none;
+      }
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  .flex-box__content {
+    max-width: 525px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 25px;
+  }
+}
+
+.design-container {
+  .flex-box {
+    &:nth-of-type(2), &:nth-of-type(4) {
+      .flex-box__item-half {
+        &:first-of-type {
+          order: 2;
+          @media only screen and (min-width: 767px) {
+            order: 1;
+          }
+        }
+        &:last-of-type {
+          order: 1;
+          @media only screen and (min-width: 767px) {
+            order: 2;
+          }
+        }
+      }
+    }
+  }
+  .flex-box__item-half {
+    background: white;
+  }
+}

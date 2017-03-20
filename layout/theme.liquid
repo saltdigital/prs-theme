@@ -38,6 +38,8 @@
 
     <!-- Stylesheets for Parallax 3.1.5 -->
     {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
+    <!-- Custom Styles -->
+    {{ 'styles-custom.scss.css' | asset_url | stylesheet_tag }}
 
     {% if settings.favicon != nil %}
       <link rel="shortcut icon" type="image/x-icon" href="{{ settings.favicon | img_url }}">
@@ -87,7 +89,7 @@
         </div>
       </div>
     </div>
-    
+
     {% if settings.size_chart != blank %}
       <div id="size-chart" class="size_chart_content">
         <h5 class="center">{{ pages[settings.size_chart].title }}</h5>
