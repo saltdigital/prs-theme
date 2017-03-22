@@ -1,7 +1,100 @@
 /* #Custom Styles
 ================================================== */
 
-/* Landing Page  */
+/* ===============
+    Flex Box Container
+    =============== */
+.flex-box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  @media only screen and (min-width: 767px) {
+    flex-direction: row;
+  }
+  &:nth-of-type(2), &:nth-of-type(4) {
+    .flex-box__item-half {
+      &:first-of-type {
+        order: 2;
+        @media only screen and (min-width: 767px) {
+          order: 1;
+        }
+      }
+      &:last-of-type {
+        order: 1;
+        @media only screen and (min-width: 767px) {
+          order: 2;
+        }
+      }
+    }
+  }
+  .flex-box__item-half {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 1 100%;
+    text-align: left;
+    @media only screen and (min-width: 767px) {
+      flex: 0 1 50%;
+      text-align: center;
+    }
+    ul {
+      margin: 0;
+      @media only screen and (min-width: 767px) {
+        list-style: none;
+      }
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  .flex-box__content {
+    max-width: 525px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 25px;
+  }
+  .flex-box__one-third {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 0 1 49%;
+    text-align: left;
+    position: relative;
+    @media only screen and (min-width: 767px) {
+      flex: 0 1 33%;
+      text-align: center;
+    }
+    img, svg {
+        position: relative;
+    }
+    h2 {
+      position: absolute;
+      color: white;
+      top: 40%;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+  }
+  .flex-box__four {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 0 1 50%;
+    text-align: left;
+    position: relative;
+    @media only screen and (min-width: 767px) {
+      flex: 0 1 25%;
+      text-align: center;
+    }
+  }
+}
+
+
+/* Landing Page
+    =========== */
 
 .featured-content-section {
   h2.title {
@@ -57,59 +150,9 @@
     }
 }
 
-/* Design Page */
-
-/* Flex Box Container */
-.flex-box {
-  display: flex;
-  flex-direction: column;
-  @media only screen and (min-width: 767px) {
-    flex-direction: row;
-  }
-  &:nth-of-type(2), &:nth-of-type(4) {
-    .flex-box__item-half {
-      &:first-of-type {
-        order: 2;
-        @media only screen and (min-width: 767px) {
-          order: 1;
-        }
-      }
-      &:last-of-type {
-        order: 1;
-        @media only screen and (min-width: 767px) {
-          order: 2;
-        }
-      }
-    }
-  }
-  .flex-box__item-half {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 0 1 100%;
-    text-align: left;
-    @media only screen and (min-width: 767px) {
-      flex: 0 1 50%;
-      text-align: center;
-    }
-    ul {
-      margin: 0;
-      @media only screen and (min-width: 767px) {
-        list-style: none;
-      }
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-  }
-  .flex-box__content {
-    max-width: 525px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 25px;
-  }
-}
+/*=========
+  Design Page
+   ========== */
 
 .design-container {
   .flex-box {
@@ -134,3 +177,13 @@
     background: white;
   }
 }
+
+/*===========
+  Stainless Page
+   =========== */
+
+   .stainless-container {
+     .flex-box {
+       flex-direction: row;
+     }
+   }

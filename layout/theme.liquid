@@ -55,6 +55,7 @@
     {% endif %}
 
     {{ 'app.js' | asset_url | script_tag }}
+    {{ 'scripts.js' | asset_url | script_tag }}
 
     <!--[if lte IE 8]>
       {{ 'ie.css' | asset_url | stylesheet_tag }}
