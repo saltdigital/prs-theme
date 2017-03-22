@@ -6,31 +6,34 @@
           {% if block.settings.link != blank %}
             <a href="{{ block.settings.link }}">
           {% endif %}
-
-          {% if block.settings.image != nil %}
-            <img {% if section.settings.rounded_image != blank %}class="rounded"{% endif %} src="{{ block.settings.image | img_url: '840x' }}" alt="{{ block.settings.image.alt }}" />
-          {% else %}
-            {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
-            {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
-          {% endif %}
-
-          {% if block.settings.title != blank %}
-            <h2>{{ block.settings.title }}</h2>
-            {% if section.settings.show_divider %}
-              <div class="feature_divider"></div>
+          <div class="image__wrapper">
+            {% if block.settings.image != nil %}
+              <img {% if section.settings.rounded_image != blank %}class="rounded"{% endif %} src="{{ block.settings.image | img_url: '840x' }}" alt="{{ block.settings.image.alt }}" />
+            {% else %}
+              {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+              {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
             {% endif %}
-          {% endif %}
+
+            {% if block.settings.title != blank %}
+              <h2>{{ block.settings.title }}</h2>
+
+            {% endif %}
+          </div>
+
           {% if block.settings.link != blank %}
             </a>
           {% endif %}
           <div class="expanded-content">
+            {% if section.settings.show_divider %}
+              <div class="feature_divider"></div>
+            {% endif %}
             {% if block.settings.text != blank %}
               {{ block.settings.text }}
             {% endif %}
           </div>
         </div>
 
-        
+
       {% endfor %}
     </div>
   </div>
