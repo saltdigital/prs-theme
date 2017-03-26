@@ -1,39 +1,41 @@
-<div class="content" style="padding-top:0">
-  <div class="">
-    <div class="flex-box clearfix feature">
+<div class="container content" style="padding-top:0">
+  <div class="sixteen columns featured_links">
+    <div class="section clearfix feature">
       {% for block in section.blocks %}
-        <div class="{% if section.settings.featured_promos_per_row == "2" %}eight columns {% cycle 'alpha', 'omega' %}{% elsif section.settings.featured_promos_per_row == "3" %}flex-box__one-third {% cycle 'alpha', '', 'omega' %}{% else %} flex-box__four {% cycle 'alpha', '', '', 'omega' %}{% endif %} {% if section.settings.featured_links_style != blank %}{{ section.settings.featured_links_style }} {% cycle 'delay-025s', 'delay-05s', 'delay-075s', 'delay-1s' %}{% endif %} center">
+        <div class="{% if section.settings.featured_promos_per_row == "2" %}eight columns {% cycle 'alpha', 'omega' %}{% elsif section.settings.featured_promos_per_row == "3" %}one-third column {% cycle 'alpha', '', 'omega' %}{% else %}four columns {% cycle 'alpha', '', '', 'omega' %}{% endif %} {% if section.settings.featured_links_style != blank %}{{ section.settings.featured_links_style }} {% cycle 'delay-025s', 'delay-05s', 'delay-075s', 'delay-1s' %}{% endif %} center">
           {% if block.settings.link != blank %}
             <a href="{{ block.settings.link }}">
           {% endif %}
-          <div class="image__wrapper">
-            {% if block.settings.image != nil %}
-              <img {% if section.settings.rounded_image != blank %}class="rounded"{% endif %} src="{{ block.settings.image | img_url: '840x' }}" alt="{{ block.settings.image.alt }}" />
-            {% else %}
-              {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
-              {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
-            {% endif %}
 
-            {% if block.settings.title != blank %}
-              <h2>{{ block.settings.title }}</h2>
-
-            {% endif %}
-          </div>
-
-          {% if block.settings.link != blank %}
-            </a>
+          {% if block.settings.image != nil %}
+            <img {% if section.settings.rounded_image != blank %}class="rounded"{% endif %} src="{{ block.settings.image | img_url: '840x' }}" alt="{{ block.settings.image.alt }}" />
+          {% else %}
+            {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+            {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
           {% endif %}
-          <div class="expanded-content">
+
+          {% if block.settings.title != blank %}
+            <h2>{{ block.settings.title }}</h2>
             {% if section.settings.show_divider %}
               <div class="feature_divider"></div>
             {% endif %}
-            {% if block.settings.text != blank %}
-              {{ block.settings.text }}
-            {% endif %}
-          </div>
+          {% endif %}
+          {% if block.settings.link != blank %}
+            </a>
+          {% endif %}
+
+          {% if block.settings.text != blank %}
+            {{ block.settings.text }}
+          {% endif %}
         </div>
 
-
+        {% if section.settings.featured_promos_per_row == "2" %}
+          {% cycle '', '<br class="clear " />' %}
+        {% elsif section.settings.featured_promos_per_row == "3" %}
+          {% cycle '', '', '<br class="clear" />' %}
+        {% else %}
+          {% cycle '', '', '', '<br class="clear" />' %}
+        {% endif %}
       {% endfor %}
     </div>
   </div>
@@ -41,7 +43,7 @@
 
 {% schema %}
 {
-  "name": "Categories",
+  "name": "Supply categories",
   "class": "featured-promotions-section",
   "max_blocks": 6,
   "settings": [

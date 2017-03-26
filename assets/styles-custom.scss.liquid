@@ -1,9 +1,12 @@
 /* #Custom Styles
 ================================================== */
 
-/* ===============
-    Flex Box Container
-    =============== */
+/* ============
+    Global Classes
+    ============ */
+
+/* Flex Box Container */
+
 .flex-box {
   display: flex;
   flex-direction: column;
@@ -32,10 +35,9 @@
     justify-content: center;
     align-items: center;
     flex: 0 1 100%;
-    text-align: left;
+    text-align: center;
     @media only screen and (min-width: 767px) {
       flex: 0 1 50%;
-      text-align: center;
     }
     ul {
       margin: 0;
@@ -59,19 +61,29 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    flex: 0 1 50%;
-    text-align: left;
+    flex: 0 1 100%;
+    text-align: center;
     position: relative;
-    @media only screen and (min-width: 767px) {
+    @media only screen and (min-width: 480px) {
+      flex: 0 1 50%;
+    }
+    @media only screen and (min-width:  767px) {
       flex: 0 1 33%;
-      text-align: center;
     }
     img, svg {
         position: relative;
     }
     h2 {
       position: absolute;
-      color: white;
+      color: black;
+      background-color: white;
+      max-width: 210px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      padding: 10px;
       left: 50%;
       top: 50%;
       transform: translate(-50%,-50%);
@@ -98,7 +110,16 @@
   }
 }
 
-/* Landing Page
+.parallax-banner {
+  .subtitle {
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/*  ===========
+    Landing Page
     =========== */
 
 .featured-content-section {
@@ -155,7 +176,7 @@
     }
 }
 
-/*=========
+/*==========
   Design Page
    ========== */
 
