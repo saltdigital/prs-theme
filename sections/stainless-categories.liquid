@@ -13,7 +13,7 @@
               {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
               {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
             {% endif %}
-
+            <div class="gradient"></div>
             {% if block.settings.title != blank %}
               <h2>{{ block.settings.title }}</h2>
 
@@ -23,7 +23,7 @@
           {% if block.settings.link != blank %}
             </a>
           {% endif %}
-          <div class="expanded-content">
+          <div class="hover-content">
             {% if section.settings.show_divider %}
               <div class="feature_divider"></div>
             {% endif %}
@@ -43,7 +43,7 @@
 {
   "name": "Categories",
   "class": "featured-promotions-section",
-  "max_blocks": 6,
+  "max_blocks": 12,
   "settings": [
     {
       "type": "select",
