@@ -101,11 +101,15 @@
 {% endif %} -->
 
 <script type="text/javascript">
+var isDraggable = $(document).width() > 480 ? true : false;
 function initMap() {
       var prs = {lat: 49.2814681, lng: -123.08175};
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 14,
         center: prs,
+        scrollwheel: false,
+        draggable: isDraggable,
+        mapTypeControl: false,
         styles: [
               {
                   "featureType": "administrative",
@@ -196,6 +200,7 @@ function initMap() {
               }
             ]
       });
+      // var image = new google.maps.MarkerImage(window + "/assets/marker-prs.png", null, null, null, new google.maps.Size(60, 25));
       var marker = new google.maps.Marker({
         position: prs,
         map: map
