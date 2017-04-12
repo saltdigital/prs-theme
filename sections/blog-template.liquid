@@ -34,14 +34,14 @@
   {% paginate blog.articles by section.settings.blog_posts_per_page %}
     {% unless section.settings.image %}
       <div class="sixteen columns">
-        <h1 class="center">
+        <!-- <h1 class="center">
           {% if current_tags %}
             <a href="/blogs/{{ blog.handle }}/tagged/{{ current_tags | handleize }}" title="{{ blog.title | escape }}">{{ current_tags }}</a>
           {% else %}
             <a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title }}</a>
           {% endif %}
         </h1>
-        <div class="feature_divider"></div>
+        <div class="feature_divider"></div> -->
       </div>
     {% endunless %}
 
@@ -87,14 +87,32 @@
 
 
     <div class="select-dropdown">
-        <select class="" name="" onchange="window.location.href=this.value;">
-          <option value="none" selected disabled>All Categories</option>
-            {% for tag in blog.all_tags %}
-              <option value="{{shop.url}}{{blog.url}}/tagged/{{ tag | handleize}}">
-                {{ tag }}
-             </option>
-            {% endfor %}
-        </select>
+      <div class="select-content">
+        <div class="headline-wrapper">
+          <h1 class="">
+            {% if current_tags %}
+              <a href="/blogs/{{ blog.handle }}/tagged/{{ current_tags | handleize }}" title="{{ blog.title | escape }}">{{ current_tags }}</a>
+            {% else %}
+              <a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title }}</a>
+            {% endif %}
+          </h1>
+        </div>
+        <div class="select-wrapper">
+          <select class="" name="">
+            <option value="" selected disabled>Establishment</option>
+          </select>
+            <select class="" name="" onchange="window.location.href=this.value;">
+              <option value="none" selected disabled>All Categories</option>
+                {% for tag in blog.all_tags %}
+                  <option value="{{shop.url}}{{blog.url}}/tagged/{{ tag | handleize}}">
+                    {{ tag }}
+                 </option>
+                {% endfor %}
+            </select>
+        </div>
+
+      </div>
+
     </div>
 
 {% comment %}

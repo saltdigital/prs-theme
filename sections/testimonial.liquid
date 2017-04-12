@@ -17,9 +17,9 @@
             {{block.settings.testimonial}}
 
             {% if block.settings.name != blank %}
-              <p>
+              <p class="name">
                 <span class="testimonial-dash">&mdash; </span>
-                
+
                 {% if block.settings.site_link != blank %}
                   <a href="{{ block.settings.site_link }}" target="_blank">
                 {% endif %}
@@ -35,6 +35,15 @@
                 {% endif %}
               </p>
             {% endif %}
+            <div class="subtitles">
+              <p>
+                {{block.settings.position}}
+              </p>
+              <p>
+                {{block.settings.company}}
+              </p>
+            </div>
+
           </div>
 
           {% if section.settings.testimonials_per_row == "1" %}
@@ -50,6 +59,21 @@
     </div>
   {% endif %}
 </div>
+
+<style media="screen">
+  .testimonial-block {
+  }
+  .name {
+    margin: 0;
+  }
+  .subtitles {
+    margin-bottom: 20px;
+  }
+  .subtitles p {
+    margin: 0;
+    font-size: 12px;
+  }
+</style>
 
 {% schema %}
   {
@@ -112,6 +136,20 @@
             "label": "Customer name / link",
             "info": "Optional",
             "default": "John Doe"
+          },
+          {
+            "type": "text",
+            "id": "position",
+            "label": "Customer position",
+            "info": "Optional",
+            "default": "President"
+          },
+          {
+            "type": "text",
+            "id": "company",
+            "label": "Company Name",
+            "info": "Optional",
+            "default": "Company"
           },
           {
             "type": "url",
