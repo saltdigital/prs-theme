@@ -86,7 +86,7 @@
     {% endif %}
 
 
-    <div class="select-dropdown">
+    <div class="select-bar">
       <div class="select-content">
         <div class="headline-wrapper">
           <h1 class="">
@@ -98,16 +98,26 @@
           </h1>
         </div>
         <div class="select-wrapper">
-          <select class="" name="">
-            <option value="" selected disabled>Establishment</option>
+          <select class="" name="" onchange="window.location.href=this.value;">
+            <option value="none" selected disabled>Establishment</option>
+            <option value="{{shop.url}}{{blog.url}}/tagged/restaurant">Restaurant</option>
+            <option value="{{shop.url}}{{blog.url}}/tagged/cafe">Cafe</option>
+            <option value="{{shop.url}}{{blog.url}}/tagged/bars-pubs">Bars &amp; Pubs</option>
+            <option value="{{shop.url}}{{blog.url}}/tagged/quick-service">Quick Service</option>
+            <option value="{{shop.url}}{{blog.url}}/tagged/hotel">Hotel</option>
+            <option value="{{shop.url}}{{blog.url}}/tagged/quick-service">Quick Service</option>
           </select>
             <select class="" name="" onchange="window.location.href=this.value;">
-              <option value="none" selected disabled>All Categories</option>
-                {% for tag in blog.all_tags %}
-                  <option value="{{shop.url}}{{blog.url}}/tagged/{{ tag | handleize}}">
-                    {{ tag }}
-                 </option>
-                {% endfor %}
+              <option value="none" selected disabled>Product</option>
+              <option value="{{shop.url}}{{blog.url}}/tagged/cooking-line">Cooking Line</option>
+              <option value="{{shop.url}}{{blog.url}}/tagged/bars">Bars</option>
+              <option value="{{shop.url}}{{blog.url}}/tagged/ventilation">Ventilation</option>
+              <option value="{{shop.url}}{{blog.url}}/tagged/food-preperation">Food Preperation</option>
+              <option value="{{shop.url}}{{blog.url}}/tagged/refrigeration">Refrigeration</option>
+              <option value="{{shop.url}}{{blog.url}}/tagged/buffet-service">Buffet &amp; Service</option>
+              <option value="{{shop.url}}{{blog.url}}/tagged/display-merchandising">Display &amp; Merchandising</option>
+              <option value="{{shop.url}}{{blog.url}}/tagged/beverage-service">Beverage Service</option>
+              <option value="{{shop.url}}{{blog.url}}/tagged/specialty-equipment">Specialty Equipment</option>
             </select>
         </div>
 
