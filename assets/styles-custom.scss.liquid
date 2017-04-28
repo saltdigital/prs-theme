@@ -10,6 +10,16 @@
   border-width: 0;
 }
 
+.icon-circle-left, .icon-circle-right, .icon-twitter, .icon-facebook, .icon-instagram {
+  color: white;
+}
+.action_button {
+  letter-spacing: 1.5px;
+}
+.footer a:hover {
+  color: #2DACF7;
+}
+
 /* Flex Box Container */
 
 .flex-box {
@@ -244,13 +254,15 @@
        height: 100%;
      }
      .flex-box__one-third {
+       height: 240px;
+       overflow: hidden;
        &:hover {
          .gradient {
            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
          }
          .hover-content {
            opacity: 1;
-           top: calc(50% + 40px);
+           top: calc(50% + 23px);
          }
        }
      }
