@@ -3,7 +3,7 @@
 {% endif %}
 
 {% if section.settings.image != nil %}
-  <div id="slide-blog" class="parallax-banner featured-image--{{ feature_image }}">
+  <div id="slide-blog" class="parallax-banner featured-image--{{ feature_image }} portfolio-banner">
     <div class="bcg"
         data-bottom-top="background-position: 50% 0px;"
         data-top-bottom="background-position: 50% -200px;"
@@ -29,7 +29,44 @@
     </div>
   </div>
 {% endif %}
+<div class="select-bar sticky-header--true delay-0s animated">
+  <div class="select-content">
+    <div class="headline-wrapper">
+      <h1 class="">
+        {% if current_tags %}
+          <a href="/blogs/{{ blog.handle }}/tagged/{{ current_tags | handleize }}" title="{{ blog.title | escape }}">{{ current_tags }}</a>
+        {% else %}
+          <a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title }}</a>
+        {% endif %}
+      </h1>
+    </div>
+    <div class="select-wrapper">
+      <select class="" name="" onchange="window.location.href=this.value;">
+        <option value="none" selected disabled>Establishment</option>
+        <option value="{{shop.url}}{{blog.url}}/tagged/restaurant">Restaurant</option>
+        <option value="{{shop.url}}{{blog.url}}/tagged/cafe">Cafe</option>
+        <option value="{{shop.url}}{{blog.url}}/tagged/bars-pubs">Bars &amp; Pubs</option>
+        <option value="{{shop.url}}{{blog.url}}/tagged/quick-service">Quick Service</option>
+        <option value="{{shop.url}}{{blog.url}}/tagged/hotel">Hotel</option>
+        <option value="{{shop.url}}{{blog.url}}/tagged/quick-service">Quick Service</option>
+      </select>
+        <select class="" name="" onchange="window.location.href=this.value;">
+          <option value="none" selected disabled>Product</option>
+          <option value="{{shop.url}}{{blog.url}}/tagged/cooking-line">Cooking Line</option>
+          <option value="{{shop.url}}{{blog.url}}/tagged/bars">Bars</option>
+          <option value="{{shop.url}}{{blog.url}}/tagged/ventilation">Ventilation</option>
+          <option value="{{shop.url}}{{blog.url}}/tagged/food-preperation">Food Preperation</option>
+          <option value="{{shop.url}}{{blog.url}}/tagged/refrigeration">Refrigeration</option>
+          <option value="{{shop.url}}{{blog.url}}/tagged/buffet-service">Buffet &amp; Service</option>
+          <option value="{{shop.url}}{{blog.url}}/tagged/display-merchandising">Display &amp; Merchandising</option>
+          <option value="{{shop.url}}{{blog.url}}/tagged/beverage-service">Beverage Service</option>
+          <option value="{{shop.url}}{{blog.url}}/tagged/specialty-equipment">Specialty Equipment</option>
+        </select>
+    </div>
 
+  </div>
+
+</div>
 <div class="container main content main-wrapper">
   {% paginate blog.articles by section.settings.blog_posts_per_page %}
     {% unless section.settings.image %}
@@ -86,44 +123,6 @@
     {% endif %}
 
 
-    <div class="select-bar">
-      <div class="select-content">
-        <div class="headline-wrapper">
-          <h1 class="">
-            {% if current_tags %}
-              <a href="/blogs/{{ blog.handle }}/tagged/{{ current_tags | handleize }}" title="{{ blog.title | escape }}">{{ current_tags }}</a>
-            {% else %}
-              <a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title }}</a>
-            {% endif %}
-          </h1>
-        </div>
-        <div class="select-wrapper">
-          <select class="" name="" onchange="window.location.href=this.value;">
-            <option value="none" selected disabled>Establishment</option>
-            <option value="{{shop.url}}{{blog.url}}/tagged/restaurant">Restaurant</option>
-            <option value="{{shop.url}}{{blog.url}}/tagged/cafe">Cafe</option>
-            <option value="{{shop.url}}{{blog.url}}/tagged/bars-pubs">Bars &amp; Pubs</option>
-            <option value="{{shop.url}}{{blog.url}}/tagged/quick-service">Quick Service</option>
-            <option value="{{shop.url}}{{blog.url}}/tagged/hotel">Hotel</option>
-            <option value="{{shop.url}}{{blog.url}}/tagged/quick-service">Quick Service</option>
-          </select>
-            <select class="" name="" onchange="window.location.href=this.value;">
-              <option value="none" selected disabled>Product</option>
-              <option value="{{shop.url}}{{blog.url}}/tagged/cooking-line">Cooking Line</option>
-              <option value="{{shop.url}}{{blog.url}}/tagged/bars">Bars</option>
-              <option value="{{shop.url}}{{blog.url}}/tagged/ventilation">Ventilation</option>
-              <option value="{{shop.url}}{{blog.url}}/tagged/food-preperation">Food Preperation</option>
-              <option value="{{shop.url}}{{blog.url}}/tagged/refrigeration">Refrigeration</option>
-              <option value="{{shop.url}}{{blog.url}}/tagged/buffet-service">Buffet &amp; Service</option>
-              <option value="{{shop.url}}{{blog.url}}/tagged/display-merchandising">Display &amp; Merchandising</option>
-              <option value="{{shop.url}}{{blog.url}}/tagged/beverage-service">Beverage Service</option>
-              <option value="{{shop.url}}{{blog.url}}/tagged/specialty-equipment">Specialty Equipment</option>
-            </select>
-        </div>
-
-      </div>
-
-    </div>
 
 {% comment %}
 <div class="" id="filters">

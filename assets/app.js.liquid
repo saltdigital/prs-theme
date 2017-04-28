@@ -110,6 +110,8 @@ var header = {
       $('.dropdown').css({"top": $('.header').height()-parseInt($('.nav ul.menu').css('padding-top'))-5});
     }
 
+    var $selectBar = $(".select-bar");
+
     if($header.length == 0) {
       $(".header").removeClass('is-absolute');
     }
@@ -125,6 +127,10 @@ var header = {
         $header.toggleClass('fadeInDown');
         $header.addClass('delay-0s');
         $header.toggleClass('header-background--true');
+
+        $selectBar.toggleClass('sticky');
+        $selectBar.toggleClass('fadeInDown');
+        $selectBar.toggleClass('delay-0s');
       });
     }
 
@@ -1563,7 +1569,7 @@ var instagram = {
               }
               if(count == s.limit) {
                 break;
-              }          
+              }
             }
           }
         },
