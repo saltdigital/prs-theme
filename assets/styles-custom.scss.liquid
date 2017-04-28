@@ -318,6 +318,7 @@
   ======= */
   .blog {
     div.content {
+      padding-top: 50px;
       @media only screen and (max-width: 767px) {
         padding-top: 150px;
       }
@@ -340,7 +341,7 @@
   }
   .select-bar {
     width: 100%;
-    position: relative;
+    position: absolute;
     z-index: 100;
     left: 0;
     background: white;
@@ -369,12 +370,14 @@
       justify-content: space-between;
       width: 100%;
       margin: 0 auto;
+      height: 90px;
       @media only screen and (min-width: 768px) {
         flex-direction: row;
         max-width: 768px;
       }
       @media only screen and (min-width: 960px) {
         max-width: 960px;
+        height: 60px;
       }
       @media only screen and (min-width: 1200px) {
         max-width: 1200px;
