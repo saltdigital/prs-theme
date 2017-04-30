@@ -50,14 +50,19 @@
   #video-{{ section.id }} .hsContainer {
     height: {{ section.settings.parallax_image_height }}px;
   }
-  
+
   @media only screen and (max-width: 767px) {
     #video-{{ section.id }} .hsContainer {
       height: {{ section.settings.parallax_image_height | divided_by: 2.5 }}px !important;
     }
   }
-  
+
 </style>
+
+<script>
+var iframe = document.getElementsByTagName('iframe')[0];
+iframe.contentWindow.postMessage('{"method":"setVolume", "value":0}','*');
+</script>
 
 {% schema %}
 {
