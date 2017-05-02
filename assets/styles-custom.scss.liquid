@@ -79,10 +79,10 @@
     flex: 0 1 100%;
     text-align: center;
     position: relative;
-    @media only screen and (min-width: 480px) {
+    @media only screen and (min-width: 600px) {
       flex: 0 1 50%;
     }
-    @media only screen and (min-width:  767px) {
+    @media only screen and (min-width:  960px) {
       flex: 0 1 33.33%;
     }
     img, svg {
@@ -119,6 +119,7 @@
     }
   }
 }
+
 .nav ul.menu {
   @media only screen and (min-width: 1200px) {
     padding-top: 5px !important;
@@ -194,6 +195,20 @@
     }
 }
 
+/*==========
+  Supply Page
+   ========== */
+.supply-container {
+  .img-content {
+    position: relative;
+    h2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
 /*==========
   Design Page
    ========== */
@@ -374,10 +389,10 @@
       @media only screen and (min-width: 768px) {
         flex-direction: row;
         max-width: 768px;
+        height: 60px;
       }
       @media only screen and (min-width: 960px) {
         max-width: 960px;
-        height: 60px;
       }
       @media only screen and (min-width: 1200px) {
         max-width: 1200px;
