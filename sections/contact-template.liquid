@@ -4,9 +4,10 @@
 </div>
 
 
-{% if section.settings.image != nil %}
+<!-- {% if section.settings.image != nil %}
   {% assign feature_image = true %}
-{% endif %}
+{% endif %} -->
+
 
 {% if section.settings.image != nil %}
   <div id="slide-contact" class="parallax-banner featured-image--{{ feature_image }}">
@@ -72,24 +73,67 @@
        <br class="clear" />
        <div class="five columns alpha">
         {% assign name_attr = 'contact.form.name' | handle %}
-        <label for="contactFormName">{{ 'contact.form.name' | t }} <span class="red">*</span></label>
-        <input type="text" id="contactFormName" name="contact[{{ name_attr }}]" placeholder="{{ 'contact.form.name' | t }}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" required="required">
+        <label for="contactFormName">First Name <span class="red">*</span></label>
+        <input type="text" id="contactFormName" name="contact[{{ name_attr }}]" placeholder="First Name" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" required="required">
        </div>
        <div class="five columns omega">
+         {% assign name_attr = 'contact.form.name' | handle %}
+         <label for="contactFormName">Last Name <span class="red">*</span></label>
+         <input type="text" id="contactFormName" name="contact[{{ name_attr }}]" placeholder="Last Name" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" required="required">
+       </div>
+       <div class="five columns alpha">
         <label for="contactFormEmail">{{ 'contact.form.email' | t }} <span class="red">*</span></label>
         <input type="email" id="contactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required="required">
        </div>
-       {% comment %}
-        {% assign name_attr = 'contact.form.phone' | t | handle %}
-        <label for="contactFormPhone" class="hidden-label">{{ 'contact.form.phone' | t }}</label>
-        <input type="tel" id="contactFormPhone" name="contact[{{ name_attr }}]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
-        {% endcomment %}
+       <div class="five columns omega">
+         {% assign name_attr = 'contact.form.phone' | t | handle %}
+         <label for="contactFormPhone" class="hidden-label">{{ 'contact.form.phone' | t }}</label>
+         <input type="tel" id="contactFormPhone" name="contact[{{ name_attr }}]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+       </div>
+
+
+       <div class="five columns alpha">
+         <label for="contactFormCompany">Company</label>
+         <input type="text" name="contact[company]" placeholder="Company" />
+       </div>
+
+       <div class="five columns omega">
+         <label>What are you looking for?</label>
+        <select id="contactFormService" name="contact[service]">
+          <option value="none" selected disabled>Select an option</option>
+          <option value="Design Work">Design Work</option>
+          <option value="Pricing">Pricing</option>
+          <option value="Product Information">Product Information</option>
+          <option value="Stainless Information">Stainless Information</option>
+          <option value="Other">Other</option>
+        </select>
+       </div>
 
       <label for="contactFormMessage">{{ 'contact.form.message' | t }} <span class="red">*</span></label>
       <textarea rows="5" id="contactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}" required="required">{% if form.body %}{{ form.body }}{% endif %}</textarea>
 
       <input type="submit" class="submit action_button add_to_cart" value="{{ 'contact.form.send' | t }}" />
     {% endform %}
+  </div>
+
+  <div class="address-container">
+    <div class="address">
+      <h4>Vancouver Head Office and Showroom</h4>
+      <a href="https://goo.gl/maps/LgQBYnMSNus" target="_blank">1020 East Cordova Street <br/>Vancouver, BC  V6A 4A3</a>
+      <p>(Free parking at rear of building)</p>
+      <p>Showroom Hours | Monday - Friday, 8am - 5pm</p>
+      <p>Phone: <a href="tel:604-216-2566">604-216-2566</a></p>
+      <p>Fax: <a href="tel:604-216-2567">604-216-2567</a></p>
+      <p>Email: <a href="mailto:info@pacificrestaurantsupply.com">info@pacificrestaurantsupply.com</a></p>
+    </div>
+    <div class="address">
+      <h4>Pacific Stainless</h4>
+      <a href="https://goo.gl/maps/RMPeuDZykJt" target="_blank">1383 Coast Meridian Road <br/> Port Coquitlam, BC  V3C 6L1</a>
+      <p>Business Hours | 6am - 2pm</p>
+      <p>Phone: <a href="tel604-468-9236">604-468-9236</a></p>
+      <p>Fax: <a href="tel:604-468-9237">604-468-9237</a></p>
+      <p>Email: <a href="mailto:stainless@pacificrestaurantsupply.com">stainless@pacificrestaurantsupply.com</a></p>
+    </div>
   </div>
 </div>
 
@@ -223,6 +267,7 @@ function initMap() {
   }
 </style>
 
+
 {% schema %}
 {
   "name": "Contact page",
@@ -321,7 +366,7 @@ function initMap() {
         }
       ],
       "default": "12"
-    },*/
+    },
     {
       "type": "header",
       "content": "Banner Image"
@@ -349,7 +394,7 @@ function initMap() {
       "type": "richtext",
       "id": "subtitle",
       "label": "Subheading"
-    }
+    }*/
   ]
 }
 {% endschema %}
