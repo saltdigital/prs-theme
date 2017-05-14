@@ -37,10 +37,11 @@
 
 
 <div class="container main content main-wrapper">
-  <div class="ten columns offset-by-three page clearfix">
+  <h1 class="center">{{ page.title }}</h1>
+  <div class="feature_divider"></div>
+  <div class="five columns offset-by-two page clearfix">
     {% if section.settings.image == nil %}
-      <h1 class="center">{{ page.title }}</h1>
-      <div class="feature_divider"></div>
+
     {% endif %}
 
     {% form 'contact' %}
@@ -71,34 +72,34 @@
       {{ page.content }}
 
        <br class="clear" />
-       <div class="five columns alpha">
+       <div class="two-half columns alpha">
         {% assign name_attr = 'contact.form.name' | handle %}
         <label for="contactFormName">First Name <span class="red">*</span></label>
         <input type="text" id="contactFormName" name="contact[{{ name_attr }}]" placeholder="First Name" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" required="required">
        </div>
-       <div class="five columns omega">
+       <div class="two-half columns omega">
          {% assign name_attr = 'contact.form.name' | handle %}
          <label for="contactFormName">Last Name <span class="red">*</span></label>
          <input type="text" id="contactFormName" name="contact[{{ name_attr }}]" placeholder="Last Name" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" required="required">
        </div>
-       <div class="five columns alpha">
+       <div class="two-half columns alpha">
         <label for="contactFormEmail">{{ 'contact.form.email' | t }} <span class="red">*</span></label>
         <input type="email" id="contactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required="required">
        </div>
-       <div class="five columns omega">
+       <div class="two-half columns omega">
          {% assign name_attr = 'contact.form.phone' | t | handle %}
          <label for="contactFormPhone" class="hidden-label">{{ 'contact.form.phone' | t }}</label>
          <input type="tel" id="contactFormPhone" name="contact[{{ name_attr }}]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
        </div>
 
 
-       <div class="five columns alpha">
+       <div class="two-half columns alpha">
          <label for="contactFormCompany">Company</label>
          <input type="text" name="contact[company]" placeholder="Company" />
        </div>
 
-       <div class="five columns omega">
-         <label>What are you looking for?</label>
+       <div class="two-half columns omega">
+         <label>Services</label>
         <select id="contactFormService" name="contact[service]">
           <option value="none" selected disabled>Select an option</option>
           <option value="Design Work">Design Work</option>
@@ -116,7 +117,7 @@
     {% endform %}
   </div>
 
-  <div class="address-container">
+  <div class="address-container five columns offset-by-two page clearfix">
     <div class="address">
       <h4>Vancouver Head Office and Showroom</h4>
       <a href="https://goo.gl/maps/LgQBYnMSNus" target="_blank">1020 East Cordova Street <br/>Vancouver, BC  V6A 4A3</a>
@@ -263,6 +264,9 @@ function initMap() {
   @media only screen and (max-width: 767px) {
     #slide-contact .hsContainer {
       height: {{ section.settings.image_height | divided_by: 1.5 }}px !important;
+    }
+    #map {
+      height:300px;
     }
   }
 </style>
