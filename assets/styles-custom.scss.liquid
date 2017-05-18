@@ -347,6 +347,19 @@
         padding-top: 150px;
       }
     }
+    .hsContent h1 {
+      background: black;
+      max-width: 350px;
+      width: 100%;
+      height: 60px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media only screen and (max-width: 767px) {
+        max-width: 250px;
+      }
+    }
     h2 {
       font-size: 15px;
       @media only screen and (max-width: 768px) {
@@ -605,6 +618,9 @@ div.cs-skin-border {
 	border-color: inherit;
 	-webkit-transition: background 0.2s, border-color 0.2s;
 	transition: background 0.2s, border-color 0.2s;
+  letter-spacing: 0.5px;
+  font-weight: 100;
+  text-transform: uppercase;
 }
 
 .cs-skin-border > span::after,
@@ -618,7 +634,7 @@ div.cs-skin-border {
 }
 
 .cs-skin-border .cs-selected span::after {
-	content: '\2191';
+	content: '\2190';
 	color: #ddd9c9;
 	font-size: 1.5em;
 	opacity: 1;
@@ -651,6 +667,12 @@ div.cs-skin-border {
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
   font-size: 14px;
+  letter-spacing: 0.5px;
+  font-weight: 100;
+  text-transform: uppercase;
+  @media only screen and (max-width: 767px) {
+    font-size: 10px;
+  }
 }
 
 .cs-skin-border .cs-options li span:hover,
