@@ -95,6 +95,47 @@
 
           <span class="clear"></span>
 
+          <div class="slider">
+
+              {% assign my_image = article.metafields.sf_gallery.image %}
+              {% if my_image %}
+              <div class="slider__item">
+                <img src="{{ my_image }}">
+              </div>
+              {% endif %}
+
+
+              {% assign my_image = article.metafields.sf_gallery.image_2 %}
+              {% if my_image %}
+                <div class="slider__item">
+                <img src="{{ my_image }}">
+              </div>
+              {% endif %}
+
+
+              {% assign my_image = article.metafields.sf_gallery.image_3 %}
+              {% if my_image %}
+              <div class="slider__item">
+                <img src="{{ my_image }}">
+              </div>
+              {% endif %}
+
+              {% assign my_image = article.metafields.sf_gallery.image_4 %}
+              {% if my_image %}
+              <div class="slider__item">
+                <img src="{{ my_image }}">
+              </div>
+              {% endif %}
+
+              {% assign my_image = article.metafields.sf_gallery.image_5 %}
+              {% if my_image %}
+              <div class="slider__item">
+                <img src="{{ my_image }}">
+              </div>
+              {% endif %}
+
+          </div>
+
           {% if section.settings.display_social_buttons %}
             <share-button></share-button>
           {% endif %}

@@ -44,7 +44,7 @@
     {% if settings.favicon != nil %}
       <link rel="shortcut icon" type="image/x-icon" href="{{ settings.favicon | img_url }}">
     {% else %}
-      <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.png' | asset_url }}">
+      <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.ico' | asset_url }}">
     {% endif %}
 
     <link rel="canonical" href="{{ canonical_url }}" />

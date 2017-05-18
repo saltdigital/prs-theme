@@ -19,7 +19,6 @@
 .hsContainer {
   z-index: 171;
 }
-
 .action_button {
   letter-spacing: 1.5px;
 }
@@ -31,6 +30,21 @@
     }
   }
 }
+
+nav ul.menu {
+  @media only screen and (min-width: 1200px) {
+    padding-top: 11px !important;
+  }
+}
+
+.parallax-banner {
+  .subtitle {
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
 
 /* Flex Box Container */
 
@@ -129,20 +143,6 @@
       flex: 0 1 25%;
       text-align: center;
     }
-  }
-}
-
-.nav ul.menu {
-  @media only screen and (min-width: 1200px) {
-    padding-top: 5px !important;
-  }
-}
-
-.parallax-banner {
-  .subtitle {
-    max-width: 450px;
-    width: 100%;
-    margin: 0 auto;
   }
 }
 
@@ -457,6 +457,10 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
+  }
+
+  .slider {
+    margin-top: 60px;
   }
 
   /* ======
