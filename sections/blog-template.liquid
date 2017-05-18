@@ -41,7 +41,7 @@
       </h1>
     </div>
     <div class="select-wrapper">
-      <select class="" name="" onchange="window.location.href=this.value;">
+      <select class="cs-select cs-skin-border" name="" onchange="window.location.href=this.value;">
         <option value="none" selected disabled>Establishment</option>
         <option value="{{shop.url}}{{blog.url}}/tagged/restaurant">Restaurant</option>
         <option value="{{shop.url}}{{blog.url}}/tagged/cafe">Cafe</option>
@@ -50,7 +50,7 @@
         <option value="{{shop.url}}{{blog.url}}/tagged/hotel">Hotel</option>
         <option value="{{shop.url}}{{blog.url}}/tagged/quick-service">Quick Service</option>
       </select>
-        <select class="" name="" onchange="window.location.href=this.value;">
+        <select class="cs-select cs-skin-border" name="" onchange="window.location.href=this.value;">
           <option value="none" selected disabled>Product</option>
           <option value="{{shop.url}}{{blog.url}}/tagged/cooking-line">Cooking Line</option>
           <option value="{{shop.url}}{{blog.url}}/tagged/bars">Bars</option>
@@ -229,7 +229,11 @@
 </div>
 
 <script>
-
+(function() {
+				[].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {
+					new SelectFx(el);
+				} );
+			})();
 </script>
 
 <style>

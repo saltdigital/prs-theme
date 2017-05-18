@@ -59,9 +59,16 @@
 
 </style>
 
+<script src="https://f.vimeocdn.com/js/froogaloop2.min.js"></script>
 <script>
-var iframe = document.getElementsByTagName('iframe')[0];
-iframe.contentWindow.postMessage('{"method":"setVolume", "value":0}','*');
+$(function() {
+    var vimeo_iframe = $('iframe')[0];
+    var player = $f(vimeo_iframe);
+
+    player.addEvent('ready', function() {
+        player.api('setVolume', 0);
+    });
+});
 </script>
 
 {% schema %}

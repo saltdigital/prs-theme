@@ -12,6 +12,7 @@
                   data-bottom-top="background-position: 50% 200px;"
                   data-top-bottom="background-position: 50% -200px;"
                   data-anchor-target="#slider-{{ block.id }}" style="background-image:url({% if block.settings.image != nil %}{{ block.settings.image | img_url: '1600x' }}{% else %}{{ 'placeholder.svg' | asset_url }}{% endif %});">
+                  <div class="gradient"></div>
                   <div class="hsContainer">
                       <div class="hsContent {{ block.settings.text_align }}">
                         <div class="container">
