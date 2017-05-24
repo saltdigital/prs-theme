@@ -24,6 +24,7 @@
 }
 .footer {
   a.ss-icon {
+    font-size: 40px;
     color: white;
     &:hover {
       color: #2DACF7;
@@ -126,6 +127,7 @@
       max-width: 210px;
       width: 100%;
       display: flex;
+      z-index: 10;
       justify-content: center;
       align-items: center;
       font-size: 16px;
@@ -290,12 +292,25 @@
        height: 100%;
        background: transparent;
        transition: 800ms ease;
+       z-index: 0;
      }
      .anchor-wrapper {
        width: 100%;
        height: 100%;
      }
+     .flex-box {
+       justify-content: center;
+     }
      .flex-box__one-third {
+       border: 1px solid white;
+       height: 300px;
+       @media only screen and (min-width: 600px) {
+         flex: 0 1 49.6%;
+         height: 275px;
+       }
+       @media only screen and (min-width:  960px) {
+         flex: 0 1 33.05%;
+       }
        overflow: hidden;
        &:hover {
          .gradient {
@@ -314,6 +329,8 @@
         position: absolute;
         color: white;
         max-width: 260px;
+        left: 50%;
+        transform: translateX(-50%);
         width: 100%;
         top: 200px;
         transition: 500ms ease;
@@ -551,9 +568,8 @@ div.cs-select:focus {
 	display: block;
 	position: relative;
 	cursor: pointer;
-	padding: 1em;
+	padding: 10px;
 	white-space: nowrap;
-	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
@@ -690,10 +706,10 @@ div.cs-skin-border {
 }
 
 .cs-skin-border ul span {
-	padding: 1em 2em;
+	padding: 10px 0 10px 30px;
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 0.5px;
   font-weight: 100;
   text-transform: uppercase;
@@ -705,4 +721,34 @@ div.cs-skin-border {
 .cs-skin-border .cs-options li span:hover,
 .cs-skin-border li.cs-focus span {
 	background: rgba(211,211,211, 0.3);
+}
+
+
+/* Footer */
+.footer {
+  h6 {
+    color: #33b2e6;
+  }
+  li {
+    margin-bottom: 2px;
+  }
+}
+
+.footer_menu {
+  li {
+    display: block !important;
+  }
+
+}
+input.contact_email[type="email"] {
+  max-width: 410px;
+  width: 100% !important;
+}
+
+.contact-info {
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
 }

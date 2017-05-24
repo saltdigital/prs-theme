@@ -1,7 +1,7 @@
 <div class="footer">
   <div class="container">
 
-    <div class="seven columns">
+    <div class="four columns">
       {% if section.settings.footer_social_icons %}
         <h6>Pacific Restaurant Supply</h6>
         <div class="js-social-icons">
@@ -12,8 +12,7 @@
         {{ pages[section.settings.footer_content_page].content }}
       {% endif %}
     </div>
-
-    <div class="nine columns">
+    <div class="three columns">
       {% if section.settings.footer_linklist_1 != blank %}
         <ul class="footer_menu">
           {% for link in linklists[section.settings.footer_linklist_1].links %}
@@ -21,8 +20,10 @@
           {% endfor %}
         </ul>
       {% endif %}
-
+    </div>
+    <div class="five columns">
       {% if section.settings.footer_newsletter %}
+        <h6>Newsletter Sign Up</h6>
         <p>{{ 'general.newsletter_form.description' | t }}</p>
         {% include 'newsletter' %}
       {% endif %}
@@ -47,6 +48,14 @@
           {% endfor %}
         </div>
       {% endif %}
+    </div>
+    <div class="four columns contact-info">
+        <h6>Contact Us</h6>
+        <ul>
+          <li>Phone: <a href="tel:604-216-2566">604-216-2566</a></li>
+          <li>Email: <a href="mailto:info@pacificrestaurantsupply.com">info@pacificrestaurantsupply.com</a></li>
+          <li>Location: <a href="https://goo.gl/maps/LgQBYnMSNus">1020 East Cordova Street <br/> Vancouver, BC  V6A 4B8</a></li>
+        </ul>
     </div>
   </div>
 </div>

@@ -32,7 +32,7 @@
     },
     "newsletter_form": {
       "title": "News & Updates",
-      "description": "Sign up to get the latest on sales, new releases and more …",
+      "description": "Sign up to receive the latest updates, product features and event information.",
       "name": "Name",
       "email": "Email",
       "subscriber_first_name": "First name",
@@ -71,7 +71,7 @@
       "recent_articles": "Recent Articles",
       "categories": "Categories",
       "subscribe": "Subscribe",
-      "newsletter_description": "Sign up to get the latest on sales, new releases and more …",
+      "newsletter_description": "Sign up to get the latest on sales and new product releases:",
       "subscribe_with_rss": "Subscribe with RSS",
       "follow_us": "Follow Us",
       "follow_shop": "Follow {{ shop_name }} on Twitter"
