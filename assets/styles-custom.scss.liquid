@@ -22,15 +22,7 @@
 .action_button {
   letter-spacing: 1.5px;
 }
-.footer {
-  a.ss-icon {
-    font-size: 40px;
-    color: white;
-    &:hover {
-      color: #2DACF7;
-    }
-  }
-}
+
 .default-header {
   @media only screen and (min-width: 1200px) {
     height: 63px !important;
@@ -50,7 +42,9 @@
     margin: 0 auto;
   }
 }
-
+.icon-circle-right:before, .icon-circle-left:before {
+  color: white !important;
+}
 
 /* Flex Box Container */
 
@@ -732,23 +726,39 @@ div.cs-skin-border {
   li {
     margin-bottom: 2px;
   }
-}
-
-.footer_menu {
-  li {
-    display: block !important;
+  a {
+    color: white;
+    &:hover {
+      color: #7f8c8d;
+    }
   }
-
-}
-input.contact_email[type="email"] {
-  max-width: 410px;
-  width: 100% !important;
-}
-
-.contact-info {
-  ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
+  a.ss-icon {
+    font-size: 40px;
+    color: white;
+    &:hover {
+      color: #7f8c8d;
+    }
+  }
+  .footer_menu {
+    a {
+      color: white;
+      &:hover {
+        color: #7f8c8d;
+      }
+    }
+    li {
+      display: block !important;
+    }
+  }
+  input.contact_email[type="email"] {
+    max-width: 410px;
+    width: 100% !important;
+  }
+  .contact-info {
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
   }
 }
